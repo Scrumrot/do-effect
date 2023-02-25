@@ -1,0 +1,81 @@
+{
+  "name": "do-effect",
+  "version": "1.0.0",
+  "description": "A really bad idea for setting up dynamic useEffects",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.mjs",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17 || ^18",
+    "react-dom": "^16.8.0 || ^17 || ^18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.9.4"
+  },
+  "keywords": [
+    "useEffect",
+    "react",
+    "hooks",
+    "dynamic",
+    "typescript",
+    "react-hooks"
+  ],
+  "author": "Scrumrot",
+  "license": "MIT",
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./dist/index.cjs.js",
+        "maxSize": "9.2 kB"
+      }
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm lint:fix",
+      "npm prettier:fix"
+    ],
+    "*.{md,json,yml}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=12.22.0"
+  }
+}
